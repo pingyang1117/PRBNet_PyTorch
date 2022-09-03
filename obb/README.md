@@ -6,16 +6,25 @@ The codes here are mostly based on the [hukaixuan19970627/yolov5_obb](https://gi
 	- Model common modules
 	- Detection layers with implicit knowledge / auxiliary head (IDetect, IAuxDetect, IBin)
 	- SimOTA loss
-- PoolFormer modules for backbone model 
+- PoolFormer modules for backbone model (experimental)
 - The code implementations of [Parallel Residual Bi-Fusion Feature Pyramid Network](https://doi.org/10.1109/TIP.2021.3118953)
 
 # Installation & Getting started
 
 Please refer to the [yolov5_obb README](./yolov5obb_README.md) to get started.
 
-# Pretrained weights
+# Results and Models
 
-In Progress
+The below results are currently based on the DOTAv1.5-subsize1024-gap200 validation dataset. Results on the test dataset will be updated soon.
+
+|Model<br><sup>(download link) |Image Size<br><sup>(pixels) | TTA<br><sup>(multi-scale/<br>rotate testing) | OBB mAP<sup>val<br><sup>0.5<br>DOTAv1.5 | params<br><sup>(M) | GFLOPs<br><sup>@640 (B) |
+|---|---|---|---|---|---|
+| YOLOv5m ([Google](https://drive.google.com/file/d/1DB32HaSotKj2nyyv9caB8P3Bg1kD8mS5/view?usp=sharing)) | 640 | x | 69.62% | 21.6 | 50.5 |
+| YOLOv7-PRB ([Google](https://drive.google.com/file/d/1JHTv3nINXHx7JHvtfEBzuS4JPqGEjiDr/view?usp=sharing)) | 640 | x | 70.22% | 75.0 | 226.4 |
+
+# Updates
+
+- [2022/09/03]: We are still modifying the YOLOv7-PRB structures to attain higher mAP at a lower param/FLOPs size.
 
 # Acknowledgements
 
