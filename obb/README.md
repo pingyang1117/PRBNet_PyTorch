@@ -15,12 +15,12 @@ Please refer to the [yolov5_obb README](./yolov5obb_README.md) to get started.
 
 # Results and Models
 
-The below results are currently based on the DOTAv1.5-subsize1024-gap200 validation dataset. Results on the test dataset will be updated soon.
+The below results are currently based on the DOTAv1.5-subsize1024-gap200 validation dataset. PRB-series have been trained for extra 100 epochs as they have larger sizes. Results on the test dataset will be updated soon.
 
 |Model<br><sup>(download link) |Image Size<br><sup>(pixels) | TTA<br><sup>(multi-scale/<br>rotate testing) | OBB mAP<sup>val<br><sup>0.5<br>DOTAv1.5 | params<br><sup>(M) | GFLOPs<br><sup>@640 (B) |
 |---|---|---|---|---|---|
-| YOLOv5m ([Google](https://drive.google.com/file/d/1DB32HaSotKj2nyyv9caB8P3Bg1kD8mS5/view?usp=sharing)) | 640 | x | 69.62% | 21.6 | 50.5 |
-| YOLOv7-PRB ([Google](https://drive.google.com/file/d/1JHTv3nINXHx7JHvtfEBzuS4JPqGEjiDr/view?usp=sharing)) | 640 | x | 70.22% | 75.0 | 226.4 |
+| YOLOv5m ([Google](https://drive.google.com/file/d/1DB32HaSotKj2nyyv9caB8P3Bg1kD8mS5/view?usp=sharing)) | 640 | x | 69.621% | 21.6 | 50.5 |
+| YOLOv7-PRB-Reparameterized ([Google](https://drive.google.com/file/d/1Ya8TDitDBDtZbejQwRF0Zo2VD9Ezf4ag/view?usp=sharing)) | 640 | x | 70.228% | 75.0 | 226.4 |
 
 # Updates
 
@@ -28,7 +28,7 @@ The below results are currently based on the DOTAv1.5-subsize1024-gap200 validat
 
 # Acknowledgements
 
-Most of the codes are modified based on other amazing open-sourced repos. We would like to given special credits to the below authors:
+Most of the codes are modified based on other amazing open-sourced repos. We would like to give special credits to the below authors:
 
 * [WongKinYiu/yolov7](https://github.com/WongKinYiu/yolov7)
 * [hukaixuan19970627/yolov5_obb](https://github.com/hukaixuan19970627/yolov5_obb)
