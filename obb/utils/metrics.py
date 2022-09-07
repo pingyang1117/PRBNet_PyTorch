@@ -197,6 +197,45 @@ class ConfusionMatrix:
         for i in range(self.nc + 1):
             print(' '.join(map(str, self.matrix[i])))
 
+def bbox_riou(boxes1, boxes2, ps): #boxes1,boxes2: x,y,w,h,theta
+    theta_pos = ps[:, -180:]
+    trans_theta_pos = theta_pos.transpose(0, 1)
+    #turn GPU tensor into CPU tensor
+    boxes1=boxes1.cpu()
+    boxes2 = boxes2.cpu()
+    trans_theta_pos=trans_theta_pos.cpu()
+    # turn tensor into numpy
+    boxes1 = boxes1.numpy()
+    boxes2 = boxes2.numpy()
+    trans_theta_pos=trans_theta_pos.numpy()
+    ious_total=[]
+    # start = time.time()
+    for angle_num in range(180):
+        ious_total = []
+        ious_sum=[0]*len(boxes2)
+        for num in range(0,len(boxes2)):
+            area1 = boxes1[0][num] * boxes1[1][num]
+            area2 = boxes2[num,2] * boxes2[num,3]
+            r1 = ((boxes2[num,0], boxes2[num,1]), (boxes1[0][num], boxes1[1][num]), boxes1[2][num])
+            r2 = ((boxes2[num,0], boxes2[num,1]), (boxes2[num,2], boxes2[num,3]), angle_num)
+            int_pts = cv2.rotatedRectangleIntersection(r1, r2)[1]
+            if int_pts is not None:
+                order_pts = cv2.convexHull(int_pts, returnPoints=True)
+                int_area = cv2.contourArea(order_pts)
+                # compute iou
+                ious = int_area * 1.0 / (area1 + area2 - int_area)
+                ious_total.append(ious)
+            else:
+                ious = 0
+                ious_total.append(ious)
+
+        ious_sum=ious_sum+ious_total*trans_theta_pos[angle_num]
+        # turn numpy into CPU tensor
+    total_ious = torch.from_numpy(np.array(ious_sum))
+    total_ious = total_ious.type(torch.FloatTensor)  # 转Float
+    # turn CPU tensor into GPU tensor
+    ious = total_ious.cuda()
+    return ious
 
 def bbox_iou(box1, box2, x1y1x2y2=True, GIoU=False, DIoU=False, CIoU=False, eps=1e-7):
     # Returns the IoU of box1 to box2. box1 is 4, box2 is nx4
