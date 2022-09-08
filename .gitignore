@@ -6,6 +6,9 @@ bin-release/
 
 # Other files and folders
 .settings/
+prb/coco/
+prb/runs/
+*.pt
 
 # Executables
 *.swf
