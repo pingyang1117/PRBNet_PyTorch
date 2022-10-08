@@ -731,7 +731,6 @@ def parse_model(d, ch):  # model_dict, input_channels(3)
         m = eval(m) if isinstance(m, str) else m  # eval strings
         for j, a in enumerate(args):
             try:
-                print(args[j], type(args[j]))
                 args[j] = eval(a) if isinstance(a, str) else a  # eval strings
             except:
                 pass
