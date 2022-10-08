@@ -1,6 +1,6 @@
 # YOLOv7 with PRBNet
 
-## Performance 
+## Performance (test on [c8920ca](https://github.com/pingyang1117/PRBNet_PyTorch/tree/c8920cadfcc52cf194c49c01879bf6807792ac44))
 
 MS COCO
 
