@@ -15,7 +15,8 @@ This is the reference PyTorch implementation for training and testing  [single-s
 
 ## Performance 
 
-MS COCO
+### MS COCO
+#### P5 Model
 
 | Model | Test Size | AP<sup>test</sup> | AP<sub>50</sub><sup>test</sup> | AP<sub>75</sub><sup>test</sup> | AP<sub>s</sub><sup>test</sup> |Model Description |
 | :-- | :-: | :-: | :-: | :-: | :-: |  :-: |
@@ -25,6 +26,15 @@ MS COCO
 | [**YOLOv4-PRB-CSP**](https://drive.google.com/file/d/1vUglmai8lqfiEL2_nJZBZju-tGlrFL0I/view?usp=sharing) | 640 | **51.8%** | **70.0%** | **56.7%** | **32.6%** | [yaml](https://github.com/pingyang1117/PRBNet_PyTorch/blob/main/yolov7_prb/cfg/training/PRB_Series/yolov4-PRB-CSP.yaml)|
 | [**YOLOv7-PRB**](https://drive.google.com/file/d/1XQ2hSXq3fAWoH1qBynrMZwYSzPGe78nT/view?usp=sharing) | 640 | **52.5%** | **70.4%** | **57.2%** | **33.4%** | [yaml](https://github.com/pingyang1117/PRBNet_PyTorch/blob/main/yolov7_prb/cfg/training/PRB_Series/yolov7-PRB.yaml) |
 |  |  |  |  |  |  |  |  |
+
+#### P6 Model
+| Model | Test Size | AP<sup>test</sup> | AP<sub>50</sub><sup>test</sup> | AP<sub>75</sub><sup>test</sup> | FLOPs | Params (M) |Model Description |
+| :-- | :-: | :-: | :-: | :-: | :-: |  :-: | :-: |
+| **YOLOv7-D6** | 1280 | **56.6%** | **74.0%** | **61.8%** | **806.8G** | **154.7M** | |
+| **YOLOv7-E6E** | 1280 | **56.8%** | **74.4%** | **62.1%** | **843.2G** | **151.7M**| |
+|  |  |  |  |  |  |  |  | |
+| [**PRB-FPN6-L**](https://drive.google.com/file/d/1kxmVqGe-j9rVSUbg-122Q7hwwbeQACGM/view?usp=sharing) | 1280 | **55.9%** | **73.7%** | **61.1%** | **195.3G** | **137.5M**| [yaml](https://github.com/pingyang1117/PRBNet_PyTorch/blob/main/yolov7_prb/cfg/training/PRB_Series/PRB-FPN6-L.yaml)|
+|  |  |  |  |  |  |  |  |  |
 
 If you find our work useful in your research please consider citing our paper:
 
