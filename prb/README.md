@@ -125,7 +125,8 @@ python detect.py --weights yolov7-prb.pt --conf 0.25 --img-size 640 --source inf
 
 # Updates
 
-- [2022/08/31]: We are still modifying the YOLOv7-PRB structures to attain higher mAP at a lower param/FLOPs size with auxiliary head (IAuxDetect).
+- ~~[2022/08/31]: We are still modifying the YOLOv7-PRB structures to attain higher mAP at a lower param/FLOPs size with auxiliary head (IAuxDetect).~~
+- [2022/11/24]: We are still modifying the *re-parameterization* for PRB-FPN6-L structures to attain higher mAP at a lower inference time with auxiliary head (IAuxDetect).
 
 ## Citation
 
