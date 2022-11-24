@@ -20,7 +20,7 @@
 | **YOLOv7-D6** | 1280 | **56.6%** | **74.0%** | **61.8%** | **806.8G** | **154.7M** | |
 | **YOLOv7-E6E** | 1280 | **56.8%** | **74.4%** | **62.1%** | **843.2G** | **151.7M**| |
 |  |  |  |  |  |  |  |  | |
-| [**PRB-FPN6-L**](https://drive.google.com/file/d/1kxmVqGe-j9rVSUbg-122Q7hwwbeQACGM/view?usp=sharing) | 1280 | **55.9%** | **73.7%** | **61.1%** | **195.3G** | **137.5M**| [yaml](https://github.com/pingyang1117/PRBNet_PyTorch/blob/main/yolov7_prb/cfg/training/PRB_Series/PRB-FPN6-L.yaml)|
+| [**PRB-FPN6-L**](https://drive.google.com/file/d/1kxmVqGe-j9rVSUbg-122Q7hwwbeQACGM/view?usp=sharing) | 1280 | **55.9%** | **73.7%** | **61.1%** | **195.3G** | **137.5M**| [yaml](https://github.com/pingyang1117/PRBNet_PyTorch/blob/main/prb/cfg/training/PRB_Series/PRB-FPN6-L.yaml)|
 |  |  |  |  |  |  |  |  |  |
 
 ## Installation & Getting started
