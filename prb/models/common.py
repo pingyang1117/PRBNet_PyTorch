@@ -353,6 +353,56 @@ class BottleneckCSPC(nn.Module):
         y2 = self.cv2(x)
         return self.cv4(torch.cat((y1, y2), dim=1))
 
+class BottleneckMSP(nn.Module):
+    def __init__(self, c1, c2, n=1, shortcut=True, g=1, e=0.5):  # ch_in, ch_out, number, shortcut, groups, expansion
+        super(BottleneckMSP, self).__init__()
+        c_ = int(c2 * e)  # hidden channels
+        self.cv1 = Conv(c1, c_, 1, 1)
+        self.csp1 = BottleneckCSPC(c_, c_)
+        self.cv2 = Conv(c1, c_, 1, 1)
+        self.cv3 = Conv(c_, c_, 1, 1)
+        self.cv4 = Conv(2 * c_, c2, 1, 1)
+        self.m = nn.Sequential(*[Bottleneck(c_, c_, shortcut, g, e=1.0) for _ in range(n)])
+
+    def forward(self, x):
+        y1 = self.cv3(self.m(self.csp1(self.cv1(x))))
+        y2 = self.cv2(x)
+        return self.cv4(torch.cat((y1, y2), dim=1))
+
+class BottleneckMSPA(nn.Module):
+    def __init__(self, c1, c2, n=1, shortcut=True, g=1, e=0.5):  # ch_in, ch_out, number, shortcut, groups, expansion
+        super(BottleneckMSPA, self).__init__()
+        c_ = int(c2 * e)  # hidden channels
+        self.cv1 = Conv(c1, c_, 1, 1)
+        self.csp1 = BottleneckCSPC(c_, c_)
+        self.cv2 = Conv(c1, c_, 1, 1)
+        self.cv3 = Conv(c_, c_, 1, 1)
+        self.cv4 = Conv(2 * c_, c2, 1, 1)
+        self.m = nn.Sequential(*[Bottleneck(c_, c_, shortcut, g, e=1.0) for _ in range(n)])
+
+    def forward(self, x):
+        y1 = self.cv1(x)
+        y2 = self.cv3(self.m(self.csp1(y1)))
+        y3 = y1 + y2
+        y4 = self.cv2(x)
+        return self.cv4(torch.cat((y3, y4), dim=1))
+
+class BottleneckMSPB(nn.Module):
+    def __init__(self, c1, c2, n=1, shortcut=True, g=1, e=0.5):  # ch_in, ch_out, number, shortcut, groups, expansion
+        super(BottleneckMSPB, self).__init__()
+        c_ = int(c2 * e)   # hidden channels
+        self.cv1 = Conv(c1, c_, 1, 1)
+        self.csp1 = BottleneckCSPC(c_, c_,1,False)
+        self.cv2 = Conv(c1, c_, 1, 1)
+        self.cv3 = Conv(c_, c_, 1, 1)
+        self.cv4 = Conv(2 * c_, c2, 1, 1)
+        self.m = nn.Sequential(*[Bottleneck(c_, c_, shortcut, g, e=1.0) for _ in range(n)])
+
+    def forward(self, x):
+        y1 = self.cv3(self.m(self.csp1(self.cv1(x))))
+        y2 = self.cv2(x)
+        return self.cv4(torch.cat((y1, y2), dim=1))
+
 
 class ResCSPA(BottleneckCSPA):
     # CSP https://github.com/WongKinYiu/CrossStagePartialNetworks

@@ -8,10 +8,10 @@
 | Model | Test Size | AP<sup>test</sup> | AP<sub>50</sub><sup>test</sup> | AP<sub>75</sub><sup>test</sup> | AP<sub>s</sub><sup>test</sup> |Model Description |
 | :-- | :-: | :-: | :-: | :-: | :-: |  :-: |
 | **YOLOX-x** | 640 | **51.5%** | **-** | **-** | **-** | - |
-| **YOLOv7** | 640 | **51.4%** | **69.7%** | **55.9%** | **31.8%** | [yaml](https://github.com/pingyang1117/PRBNet_PyTorch/blob/main/yolov7_prb/cfg/training/yolov7.yaml)|
+| **YOLOv7** | 640 | **51.4%** | **69.7%** | **55.9%** | **31.8%** | [yaml](https://github.com/pingyang1117/PRBNet_PyTorch/blob/main/prb/cfg/training/yolov7.yaml)|
 |  |  |  |  |  |  |  |  |
-| [**YOLOv4-PRB-CSP**](https://drive.google.com/file/d/1vUglmai8lqfiEL2_nJZBZju-tGlrFL0I/view?usp=sharing) | 640 | **51.8%** | **70.0%** | **56.7%** | **32.6%** | [yaml](https://github.com/pingyang1117/PRBNet_PyTorch/blob/main/yolov7_prb/cfg/training/PRB_Series/yolov4-PRB-CSP.yaml)|
-| [**YOLOv7-PRB**](https://drive.google.com/file/d/1XQ2hSXq3fAWoH1qBynrMZwYSzPGe78nT/view?usp=sharing) | 640 | **52.5%** | **70.4%** | **57.2%** | **33.4%** | [yaml](https://github.com/pingyang1117/PRBNet_PyTorch/blob/main/yolov7_prb/cfg/training/PRB_Series/yolov7-PRB.yaml) |
+| [**PRB-FPN-CSP**](https://drive.google.com/file/d/1vUglmai8lqfiEL2_nJZBZju-tGlrFL0I/view?usp=sharing) | 640 | **51.8%** | **70.0%** | **56.7%** | **32.6%** | [yaml](https://github.com/pingyang1117/PRBNet_PyTorch/blob/main/prb/cfg/training/PRB_Series/PRB-FPN-CSP.yaml)|
+| [**PRB-FPN**](https://drive.google.com/file/d/1XQ2hSXq3fAWoH1qBynrMZwYSzPGe78nT/view?usp=sharing) | 640 | **52.5%** | **70.4%** | **57.2%** | **33.4%** | [yaml](https://github.com/pingyang1117/PRBNet_PyTorch/blob/main/prb/cfg/training/PRB_Series/PRB-FPN.yaml) |
 |  |  |  |  |  |  |  |  |
 
 #### P6 Model
@@ -20,7 +20,7 @@
 | **YOLOv7-D6** | 1280 | **56.6%** | **74.0%** | **61.8%** | **806.8G** | **154.7M** | |
 | **YOLOv7-E6E** | 1280 | **56.8%** | **74.4%** | **62.1%** | **843.2G** | **151.7M**| |
 |  |  |  |  |  |  |  |  | |
-| [**PRB-FPN6-L**](https://drive.google.com/file/d/1kxmVqGe-j9rVSUbg-122Q7hwwbeQACGM/view?usp=sharing) | 1280 | **55.9%** | **73.7%** | **61.1%** | **195.3G** | **137.5M**| [yaml](https://github.com/pingyang1117/PRBNet_PyTorch/blob/main/prb/cfg/training/PRB_Series/PRB-FPN6-L.yaml)|
+| [**PRB-FPN6-2PY**](https://drive.google.com/file/d/1kxmVqGe-j9rVSUbg-122Q7hwwbeQACGM/view?usp=sharing) | 1280 | **55.9%** | **73.7%** | **61.1%** | **195.3G** | **137.5M**| [yaml](https://github.com/pingyang1117/PRBNet_PyTorch/blob/main/prb/cfg/training/PRB_Series/PRB-FPN6-2PY.yaml)|
 |  |  |  |  |  |  |  |  |  |
 
 ## Installation & Getting started
@@ -31,10 +31,11 @@ Please refer to the [yolov7 README](./yolov7_README.md) to get started.
 
 Tested with: Python 3.8.0, Pytorch 1.12.0+cu117
 
-[`yolov7-prb.pt`](https://drive.google.com/file/d/1hhOGyPHogXIe0MrMw9ReJLAuDcvRbdCI/view?usp=sharing) [`yolov4-prb-csp.pt`](https://drive.google.com/file/d/1vUglmai8lqfiEL2_nJZBZju-tGlrFL0I/view?usp=sharing) 
+[`prb-fpn.pt`](https://drive.google.com/file/d/1hhOGyPHogXIe0MrMw9ReJLAuDcvRbdCI/view?usp=sharing) [`prb-fpn-csp.pt`](https://drive.google.com/file/d/1vUglmai8lqfiEL2_nJZBZju-tGlrFL0I/view?usp=sharing) 
+[`PRB-FPN6-2PY.pt`](https://drive.google.com/file/d/1kxmVqGe-j9rVSUbg-122Q7hwwbeQACGM/view?usp=sharing) 
 
 ``` shell
-python test.py --data data/coco.yaml --img 640 --batch 32 --conf 0.001 --iou 0.65 --device 0 --weights yolov7-prb.pt --name yolov7-prb_640_val
+python test.py --data data/coco.yaml --img 640 --batch 32 --conf 0.001 --iou 0.65 --device 0 --weights prb-fpn.pt --name prb-fpn_640_val
 ```
 
 You will get the results:
@@ -66,39 +67,49 @@ bash scripts/get_coco.sh
 
 * Download MS COCO dataset images ([train](http://images.cocodataset.org/zips/train2017.zip), [val](http://images.cocodataset.org/zips/val2017.zip), [test](http://images.cocodataset.org/zips/test2017.zip)) and [labels](https://github.com/WongKinYiu/yolov7/releases/download/v0.1/coco2017labels-segments.zip). If you have previously used a different version of YOLO, we strongly recommend that you delete `train2017.cache` and `val2017.cache` files, and redownload [labels](https://github.com/WongKinYiu/yolov7/releases/download/v0.1/coco2017labels-segments.zip) 
 
-Single GPU training
+Single GPU training for P5 model
 
 ``` shell
-# train yolov4-prb-csp models
-python train.py --workers 8 --device 0 --batch-size 36 --data data/coco.yaml --epochs 400 --img 640 640 --cfg cfg/training/PRB_Series/yolov4-PRB-CSP.yaml --weights '' --name yolov4-PRB-CSP --hyp data/hyp.scratch.p5.yaml
+# train prb-fpn-csp models
+python train.py --workers 8 --device 0 --batch-size 36 --data data/coco.yaml --epochs 400 --img 640 640 --cfg cfg/training/PRB_Series/PRB-FPN-CSP.yaml --weights '' --name PRB-FPN-CSP --hyp data/hyp.scratch.p5.yaml
 
-# train yolov7-prb models
-python train.py --workers 8 --device 0 --batch-size 25 --data data/coco.yaml --epochs 400 --img 640 640 --cfg cfg/training/PRB_Series/yolov7-PRB.yaml --weights '' --name yolov7-PRB --hyp data/hyp.scratch.p5.yaml
+# train prb-fpn models
+python train.py --workers 8 --device 0 --batch-size 25 --data data/coco.yaml --epochs 400 --img 640 640 --cfg cfg/training/PRB_Series/PRB-FPN.yaml --weights '' --name PRB-FPN --hyp data/hyp.scratch.p5.yaml
 ```
 
 Multiple GPU training
 
 ``` shell
-# train yolov4-prb-csp models
-python -m torch.distributed.launch --nproc_per_node 4 --master_port 9527 train.py --workers 8 --device 0,1,2,3 --sync-bn --batch-size 144 --data data/coco.yaml --img 640 640 --cfg cfg/training/PRB_Series/yolov4-PRB-CSP.yaml --weights '' --name yolov4-PRB-CSP-4GPU --hyp data/hyp.scratch.p5.yaml
+# train prb-fpn-csp models
+python -m torch.distributed.launch --nproc_per_node 4 --master_port 9527 train.py --workers 8 --device 0,1,2,3 --sync-bn --batch-size 144 --data data/coco.yaml --img 640 640 --cfg cfg/training/PRB_Series/PRB-FPN-CSP.yaml --weights '' --name PRB-FPN-CSP-4GPU --hyp data/hyp.scratch.p5.yaml
 
-# train yolov7-prb models
-python -m torch.distributed.launch --nproc_per_node 8 --master_port 9527 train.py --workers 8 --device 0,1,2,3,4,5,6,7 --sync-bn --batch-size 200 --data data/coco.yaml --img 640 640 --cfg cfg/training/PRB_Series/yolov7-PRB.yaml --weights '' --name yolov7-PRB-8GPU --hyp data/hyp.scratch.p5.yaml
+# train prb-fpn models
+python -m torch.distributed.launch --nproc_per_node 8 --master_port 9527 train.py --workers 8 --device 0,1,2,3,4,5,6,7 --sync-bn --batch-size 200 --data data/coco.yaml --img 640 640 --cfg cfg/training/PRB_Series/PRB-FPN.yaml --weights '' --name PRB-FPN-8GPU --hyp data/hyp.scratch.p5.yaml
 
 ```
 
+Single GPU training for P6 model
+
+``` shell
+# train PRB-FPN6-2PY models
+python train_aux.py --workers 8 --device 0 --batch-size 4 --data data/coco.yaml --epochs 400 --img 1280 1280 --cfg cfg/training/PRB_Series/PRB-FPN6-2PY.yaml --weights '' --name PRB-FPN-2PY --hyp data/hyp.scratch.p6.yaml
+
+```
+
+
+
 ## Transfer learning
 
-[`yolov4-prb-csp.pt`](https://drive.google.com/file/d/1vUglmai8lqfiEL2_nJZBZju-tGlrFL0I/view?usp=sharing) [`yolov7-prb_training.pt`](https://drive.google.com/file/d/1XQ2hSXq3fAWoH1qBynrMZwYSzPGe78nT/view?usp=sharing) 
+[`prb-fpn-csp.pt`](https://drive.google.com/file/d/1vUglmai8lqfiEL2_nJZBZju-tGlrFL0I/view?usp=sharing) [`prb-fpn_training.pt`](https://drive.google.com/file/d/1XQ2hSXq3fAWoH1qBynrMZwYSzPGe78nT/view?usp=sharing) 
 
 Single GPU finetuning for custom dataset
 
 ``` shell
-# finetune yolov4-prb-csp models
-python train.py --workers 8 --device 0 --batch-size 36 --data data/custom.yaml --epochs 400 --img 640 640 --cfg cfg/training/PRB_Series/yolov4-PRB-CSP.yaml --weights 'yolov4-prb-csp.pt' --name yolov4-prb-csp-custom --hyp data/hyp.scratch.custom.yaml
+# finetune prb-fpn-csp models
+python train.py --workers 8 --device 0 --batch-size 36 --data data/custom.yaml --epochs 400 --img 640 640 --cfg cfg/training/PRB_Series/PRB-FPN-CSP.yaml --weights 'prb-fpn-csp.pt' --name prb-fpn-csp-custom --hyp data/hyp.scratch.custom.yaml
 
-# finetune yolov7-prb models
-python train_aux.py --workers 8 --device 0 --batch-size 25 --data data/custom.yaml --epochs 400 --img 640 640 --cfg cfg/training/PRB_Series/yolov7-PRB.yaml --weights 'yolov7-prb_training.pt' --name yolov7-prb-custom --hyp data/hyp.scratch.custom.yaml
+# finetune prb-fpn models
+python train_aux.py --workers 8 --device 0 --batch-size 25 --data data/custom.yaml --epochs 400 --img 640 640 --cfg cfg/training/PRB_Series/PRB-FPN.yaml --weights 'prb-fpn_training.pt' --name prb-fpn-custom --hyp data/hyp.scratch.custom.yaml
 ```
 
 ## Re-parameterization
@@ -109,12 +120,12 @@ See [reparameterization-prb.ipynb](reparameterization-prb.ipynb)
 
 On video:
 ``` shell
-python detect.py --weights yolov7-prb.pt --conf 0.25 --img-size 640 --source yourvideo.mp4
+python detect.py --weights prb-fpn.pt --conf 0.25 --img-size 640 --source yourvideo.mp4
 ```
 
 On image:
 ``` shell
-python detect.py --weights yolov7-prb.pt --conf 0.25 --img-size 640 --source inference/images/horses.jpg
+python detect.py --weights prb-fpn.pt --conf 0.25 --img-size 640 --source inference/images/horses.jpg
 ```
 
 <div align="center">
