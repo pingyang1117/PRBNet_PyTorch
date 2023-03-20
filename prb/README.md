@@ -1,7 +1,6 @@
 # YOLOv7 with PRBNet
 
-## Performance (test on [c8920ca](https://github.com/pingyang1117/PRBNet_PyTorch/tree/c8920cadfcc52cf194c49c01879bf6807792ac44))
-
+## Performance 
 ### MS COCO
 #### P5 Model
 
@@ -15,13 +14,14 @@
 |  |  |  |  |  |  |  |  |
 
 #### P6 Model
-| Model | Test Size | AP<sup>test</sup> | AP<sub>50</sub><sup>test</sup> | AP<sub>75</sub><sup>test</sup> | FLOPs | Params (M) |Model Description |
-| :-- | :-: | :-: | :-: | :-: | :-: |  :-: | :-: |
-| **YOLOv7-D6** | 1280 | **56.6%** | **74.0%** | **61.8%** | **806.8G** | **154.7M** | |
-| **YOLOv7-E6E** | 1280 | **56.8%** | **74.4%** | **62.1%** | **843.2G** | **151.7M**| |
-|  |  |  |  |  |  |  |  | |
-| [**PRB-FPN6-2PY**](https://drive.google.com/file/d/1kxmVqGe-j9rVSUbg-122Q7hwwbeQACGM/view?usp=sharing) | 1280 | **55.9%** | **73.7%** | **61.1%** | **195.3G** | **137.5M**| [yaml](https://github.com/pingyang1117/PRBNet_PyTorch/blob/main/prb/cfg/training/PRB_Series/PRB-FPN6-2PY.yaml)|
-|  |  |  |  |  |  |  |  |  |
+| Model | Test Size | AP<sup>test</sup> | AP<sub>50</sub><sup>test</sup> | AP<sub>75</sub><sup>test</sup> | Params (M) |Model Description |
+| :-- | :-: | :-: | :-: |  :-: | :-: |  :-: |
+| **YOLOv7-D6** | 1280 | **56.6%** | **74.0%** | **61.8%** | **154.7M** | 
+| **YOLOv7-E6E** | 1280 | **56.8%** | **74.4%** | **62.1%** | **151.7M**| 
+|  |  |  |  |  |  |  |  | 
+| [**PRB-FPN6-2PY**](https://drive.google.com/file/d/1kxmVqGe-j9rVSUbg-122Q7hwwbeQACGM/view?usp=sharing) | 1280 | **55.9%** | **73.7%** | **61.1%** | **137.5M**| [yaml](https://github.com/pingyang1117/PRBNet_PyTorch/blob/main/prb/cfg/training/PRB_Series/PRB-FPN6-2PY.yaml)|
+| [**PRB-FPN6-3PY**](https://drive.google.com/file/d/1vcMgBM6KseSZKHjUuRhpLiVA4TswDzYu/view?usp=sharing) | 1280 | **56.7%** | **74.2%** | **61.9%** | **184.5M**| [yaml](https://github.com/pingyang1117/PRBNet_PyTorch/blob/main/prb/cfg/training/PRB_Series/PRB-FPN6-3PY.yaml)|
+|  |  |  |  |  |  |  |   |
 
 ## Installation & Getting started
 
@@ -33,6 +33,7 @@ Tested with: Python 3.8.0, Pytorch 1.12.0+cu117
 
 [`prb-fpn.pt`](https://drive.google.com/file/d/1hhOGyPHogXIe0MrMw9ReJLAuDcvRbdCI/view?usp=sharing) [`prb-fpn-csp.pt`](https://drive.google.com/file/d/1vUglmai8lqfiEL2_nJZBZju-tGlrFL0I/view?usp=sharing) 
 [`PRB-FPN6-2PY.pt`](https://drive.google.com/file/d/1kxmVqGe-j9rVSUbg-122Q7hwwbeQACGM/view?usp=sharing) 
+[`PRB-FPN6-3PY.pt`](https://drive.google.com/file/d/1vcMgBM6KseSZKHjUuRhpLiVA4TswDzYu/view?usp=sharing) 
 
 ``` shell
 python test.py --data data/coco.yaml --img 640 --batch 32 --conf 0.001 --iou 0.65 --device 0 --weights prb-fpn.pt --name prb-fpn_640_val
@@ -92,7 +93,10 @@ Single GPU training for P6 model
 
 ``` shell
 # train PRB-FPN6-2PY models
-python train_aux.py --workers 8 --device 0 --batch-size 4 --data data/coco.yaml --epochs 400 --img 1280 1280 --cfg cfg/training/PRB_Series/PRB-FPN6-2PY.yaml --weights '' --name PRB-FPN-2PY --hyp data/hyp.scratch.p6.yaml
+python train_aux.py --workers 8 --device 0 --batch-size 4 --data data/coco.yaml --epochs 400 --img 1280 1280 --cfg cfg/training/PRB_Series/PRB-FPN6-2PY.yaml --weights '' --name PRB-FPN6-2PY --hyp data/hyp.scratch.p6.yaml
+
+# train PRB-FPN6-3PY models
+python train_aux.py --workers 8 --device 0 --batch-size 28 --data data/coco.yaml --epochs 330 --img 1280 1280 --cfg cfg/training/PRB_Series/PRB-FPN6-3PY.yaml --weights '' --name PRB-FPN6-3PY --hyp data/hyp.scratch.p6.yaml
 
 ```
 
@@ -101,15 +105,17 @@ python train_aux.py --workers 8 --device 0 --batch-size 4 --data data/coco.yaml 
 ## Transfer learning
 
 [`prb-fpn-csp.pt`](https://drive.google.com/file/d/1vUglmai8lqfiEL2_nJZBZju-tGlrFL0I/view?usp=sharing) [`prb-fpn_training.pt`](https://drive.google.com/file/d/1XQ2hSXq3fAWoH1qBynrMZwYSzPGe78nT/view?usp=sharing) 
+ [`prb-fpn6-3py_training.pt`](https://drive.google.com/file/d/1_xAVNL2Zg2HGbJsh7n4bDehyFNrlXbDV/view?usp=sharing) 
+
 
 Single GPU finetuning for custom dataset
 
 ``` shell
-# finetune prb-fpn-csp models
-python train.py --workers 8 --device 0 --batch-size 36 --data data/custom.yaml --epochs 400 --img 640 640 --cfg cfg/training/PRB_Series/PRB-FPN-CSP.yaml --weights 'prb-fpn-csp.pt' --name prb-fpn-csp-custom --hyp data/hyp.scratch.custom.yaml
+# finetune p5 models (prb-fpn-csp,prb-fpn)
+python train.py --workers 8 --device 0 --batch-size 36 --data data/custom.yaml --epochs 300 --img 640 640 --cfg cfg/training/PRB_Series/PRB-FPN-CSP.yaml --weights 'prb-fpn-csp.pt' --name prb-fpn-csp-custom --hyp data/hyp.scratch.custom.yaml
 
-# finetune prb-fpn models
-python train_aux.py --workers 8 --device 0 --batch-size 25 --data data/custom.yaml --epochs 400 --img 640 640 --cfg cfg/training/PRB_Series/PRB-FPN.yaml --weights 'prb-fpn_training.pt' --name prb-fpn-custom --hyp data/hyp.scratch.custom.yaml
+# finetune p6 models (prb-fpn6-3py)
+python train_aux.py --workers 8 --device 0 --batch-size 16 --data data/custom.yaml --epochs 300 --img 1280 1280 --cfg cfg/training/PRB_Series/PRB-FPN6-3PY.yaml --weights 'prb-fpn6-3py_training.pt' --name prb-fpn6-3py-custom --hyp data/hyp.scratch.custom.yaml
 ```
 
 ## Re-parameterization
@@ -137,7 +143,7 @@ python detect.py --weights prb-fpn.pt --conf 0.25 --img-size 640 --source infere
 # Updates
 
 - ~~[2022/08/31]: We are still modifying the YOLOv7-PRB structures to attain higher mAP at a lower param/FLOPs size with auxiliary head (IAuxDetect).~~
-- [2022/11/24]: We are still modifying the *re-parameterization* for PRB-FPN6-L structures to attain higher mAP at a lower inference time with auxiliary head (IAuxDetect).
+- ~~[2022/11/24]: We are still modifying the *re-parameterization* for PRB-FPN6-L structures to attain higher mAP at a lower inference time with auxiliary head (IAuxDetect).~~
 
 ## Citation
 
