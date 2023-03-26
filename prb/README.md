@@ -21,6 +21,7 @@
 |  |  |  |  |  |  |  |  | 
 | [**PRB-FPN6-2PY**](https://drive.google.com/file/d/1kxmVqGe-j9rVSUbg-122Q7hwwbeQACGM/view?usp=sharing) | 1280 | **55.9%** | **73.7%** | **61.1%** | **137.5M**| [yaml](https://github.com/pingyang1117/PRBNet_PyTorch/blob/main/prb/cfg/training/PRB_Series/PRB-FPN6-2PY.yaml)|
 | [**PRB-FPN6-3PY**](https://drive.google.com/file/d/1vcMgBM6KseSZKHjUuRhpLiVA4TswDzYu/view?usp=sharing) | 1280 | **56.7%** | **74.2%** | **61.9%** | **184.5M**| [yaml](https://github.com/pingyang1117/PRBNet_PyTorch/blob/main/prb/cfg/training/PRB_Series/PRB-FPN6-3PY.yaml)|
+| [**PRB-FPN6-3PY**](https://drive.google.com/file/d/1id8P3NEaHFE0534yCTTpp6HcGC5rnafG/view?usp=sharing) | 1280 (train:1408) | **56.9%** | **74.1%** | **62.3%** | **184.5M**|[yaml](https://github.com/pingyang1117/PRBNet_PyTorch/blob/main/prb/cfg/training/PRB_Series/PRB-FPN6-3PY.yaml)|
 |  |  |  |  |  |  |  |   |
 
 ## Installation & Getting started
