@@ -18,24 +18,21 @@ This is the reference PyTorch implementation for training and testing  [single-s
 ### MS COCO
 #### P5 Model
 
-| Model | Test Size | AP<sup>test</sup> | AP<sub>50</sub><sup>test</sup> | AP<sub>75</sub><sup>test</sup> | AP<sub>s</sub><sup>test</sup> |
-| :-- | :-: | :-: | :-: | :-: | :-: | 
-| **YOLOX-x** | 640 | **51.5%** | **-** | **-** | **-** |
-| **YOLOv7** | 640 | **51.4%** | **69.7%** | **55.9%** | **31.8%** | 
+| Model | Test Size | AP<sup>test</sup> | AP<sub>50</sub><sup>test</sup> | AP<sub>75</sub><sup>test</sup> | AP<sub>s</sub><sup>test</sup> | FPS |
+| :-- | :-: | :-: | :-: | :-: | :-: | :-: | 
+| **YOLOv7-x** | 640 | **53.1%** | **71.2%** | **57.8%** | **33.8%** | **114** | 
 |  |  |  |  |  |  |  |  
-| [**PRB-FPN-CSP**](https://drive.google.com/file/d/1vUglmai8lqfiEL2_nJZBZju-tGlrFL0I/view?usp=sharing) | 640 | **51.8%** | **70.0%** | **56.7%** | **32.6%** | 
-| [**PRB-FPN**](https://drive.google.com/file/d/1XQ2hSXq3fAWoH1qBynrMZwYSzPGe78nT/view?usp=sharing) | 640 | **52.5%** | **70.4%** | **57.2%** | **33.4%** |
+| [**PRB-FPN-CSP**](https://drive.google.com/file/d/1vUglmai8lqfiEL2_nJZBZju-tGlrFL0I/view?usp=sharing) | 640 | **51.8%** | **70.0%** | **56.7%** | **32.6%** |  **113** | 
+| [**PRB-FPN-MSP**](https://drive.google.com/file/d/1jDEEfSa-mVmF-fm2YyoagT0XfP-zXM9s/view?usp=sharing) | 640 | **53.3%** | **71.1%** | **58.3%** | **34.1%** | **94** | 
+| [**PRB-FPN-ELAN**](https://drive.google.com/file/d/1DEhVbKLYVxEkSzsxoWgMh4y6b_h8DvwO/view?usp=sharing) | 640 | **52.5%** | **70.4%** | **57.2%** | **33.4%** |  **70** | 
 |  |  |  |  |  |  |  | 
 
 #### P6 Model
-| Model | Test Size | AP<sup>test</sup> | AP<sub>50</sub><sup>test</sup> | AP<sub>75</sub><sup>test</sup>  | Params (M) |
+| Model | Test Size | AP<sup>test</sup> | AP<sub>50</sub><sup>test</sup> | AP<sub>75</sub><sup>test</sup>  | FPS |
 | :-- | :-: | :-: | :-: | :-:  |  :-: | 
-| **YOLOv7-D6** | 1280 | **56.6%** | **74.0%** | **61.8%**  | **154.7M** |
-| **YOLOv7-E6E** | 1280 | **56.8%** | **74.4%** | **62.1%** | **151.7M**| 
+| **YOLOv7-E6E** | 1280 | **56.8%** | **74.4%** | **62.1%** | **36**| 
 |  |  |  |  |  |  |  |  
-| [**PRB-FPN6-2PY**](https://drive.google.com/file/d/1kxmVqGe-j9rVSUbg-122Q7hwwbeQACGM/view?usp=sharing) | 1280 | **55.9%** | **73.7%** | **61.1%**  | **137.5M**| 
-| [**PRB-FPN6-3PY**](https://drive.google.com/file/d/1vcMgBM6KseSZKHjUuRhpLiVA4TswDzYu/view?usp=sharing) | 1280 | **56.7%** | **74.2%** | **61.9%** | **184.5M**| 
-| [**PRB-FPN6-3PY**](https://drive.google.com/file/d/1id8P3NEaHFE0534yCTTpp6HcGC5rnafG/view?usp=sharing) | 1280 (train:1408) | **56.9%** | **74.1%** | **62.3%** | **184.5M**| 
+| [**PRB-FPN6**](https://drive.google.com/file/d/1id8P3NEaHFE0534yCTTpp6HcGC5rnafG/view?usp=sharing) | 1280 | **56.9%** | **74.1%** | **62.3%** | **31**| 
 |  |  |  |  |  |  |  |    
 
 If you find our work useful in your research please consider citing our paper:

@@ -353,23 +353,10 @@ class BottleneckCSPC(nn.Module):
         y2 = self.cv2(x)
         return self.cv4(torch.cat((y1, y2), dim=1))
 
-class BottleneckMSP(nn.Module):
-    def __init__(self, c1, c2, n=1, shortcut=True, g=1, e=0.5):  # ch_in, ch_out, number, shortcut, groups, expansion
-        super(BottleneckMSP, self).__init__()
-        c_ = int(c2 * e)  # hidden channels
-        self.cv1 = Conv(c1, c_, 1, 1)
-        self.csp1 = BottleneckCSPC(c_, c_)
-        self.cv2 = Conv(c1, c_, 1, 1)
-        self.cv3 = Conv(c_, c_, 1, 1)
-        self.cv4 = Conv(2 * c_, c2, 1, 1)
-        self.m = nn.Sequential(*[Bottleneck(c_, c_, shortcut, g, e=1.0) for _ in range(n)])
-
-    def forward(self, x):
-        y1 = self.cv3(self.m(self.csp1(self.cv1(x))))
-        y2 = self.cv2(x)
-        return self.cv4(torch.cat((y1, y2), dim=1))
 
 class BottleneckMSPA(nn.Module):
+    # MSP https://ieeexplore.ieee.org/document/9506212
+    # https://ieeexplore.ieee.org/document/9920960
     def __init__(self, c1, c2, n=1, shortcut=True, g=1, e=0.5):  # ch_in, ch_out, number, shortcut, groups, expansion
         super(BottleneckMSPA, self).__init__()
         c_1 = int(c2 * e)   # hidden channels 1
@@ -398,36 +385,6 @@ class BottleneckMSPA(nn.Module):
 
         return self.m1(torch.cat((y1_1, y3), dim=1))
 
-class BottleneckMSPB(nn.Module):
-    def __init__(self, c1, c2, n=1, shortcut=True, g=1, e=0.5):  # ch_in, ch_out, number, shortcut, groups, expansion
-        super(BottleneckMSPB, self).__init__()
-        c_1 = int(c2 * e)   # hidden channels 1
-        c_2 = int(c_1 * e)   # hidden channels 2
-        # self.cb1 = Bottleneck(c1, c_1,False)
-        self.cv1 = Conv(c1, c_1, 1, 1)
-        self.cb1 = nn.Sequential(*[Conv(c_1, c_1, 3, 1) for _ in range(2)])
-
-        # self.cb2 = Bottleneck(c_1, c_2,False)
-        self.cv2 = Conv(c_1*2, c_2, 1, 1)
-        self.cb2 = nn.Sequential(*[Conv(c_2, c_2, 3, 1) for _ in range(2)])
-
-        self.cv3 = Conv(c_1*2, c_1, 1, 1)
-
-        self.m1 = nn.Sequential(*[Bottleneck(c_1, c_1, shortcut, g, e=1.0) for _ in range(n)])
-
-        self.m2 = nn.Sequential(*[Bottleneck(c1, c2, shortcut, g, e=1.0) for _ in range(n)])
-
-    def forward(self, x):
-        y1_1 = self.cv1(x)
-        y1_2 = self.cb1(y1_1)
-        y1 = torch.cat((y1_1, y1_2), dim=1)
-
-        y2_1 = self.cv2(y1)
-        y2_2 = self.cb2(y2_1)
-
-        y3 = self.m1(self.cv3(torch.cat((y1_1, y2_1, y2_2), dim=1)))
-
-        return self.m2(torch.cat((y1_1, y3), dim=1))
 
 
 class ResCSPA(BottleneckCSPA):
@@ -2158,6 +2115,24 @@ class RBBlockC(nn.Module):
         x3 = self.up1(x[2])
         return self.out_cv(torch.cat((x1, x2, x3), dim=1))
 
+class RBBlockTiny(nn.Module):
+    def __init__(self, in_cs, out_c, current, shallow, sf=2, mode="nearest"):
+        # in_cs = [current channel, shallow channel, deep channel]
+        # current/shallow = [Conv size, kernel size, stride]
+        super(RBBlockTiny, self).__init__()
+        self.up1 = nn.Upsample(size=None, scale_factor=sf, mode=mode)  # for deep layer (i+1)-th
+        self.cv1 = Conv(in_cs[0], *current, None, 1, nn.LeakyReLU(0.1))  # for current layer i-th
+        self.cv2 = Conv(in_cs[1], *shallow, None, 1, nn.LeakyReLU(0.1))  # for shallow layer (i-1)-th
+        self.out_cv = Conv(current[0] + shallow[0] + in_cs[2], out_c, 1, 1, None, 1, nn.LeakyReLU(0.1))
+    
+    # x = [current layer, shallow layer, deep layer]
+    def forward(self, x):
+        x1 = self.cv1(x[0])
+        x2 = self.cv2(x[1])
+        # Upsample: (b, c, w, h) => (b, c, w * sf, h * sf)
+        x3 = self.up1(x[2])
+        return self.out_cv(torch.cat((x1, x2, x3), dim=1))
+
 
 # CORE block in the paper settings, with ReOrg and bottleneck
 class CORE(nn.Module):
@@ -2190,6 +2165,24 @@ class BFM(nn.Module):
         self.cv1 = Conv(in_cs[0]*4, *fe_a)  # for FE Scale (i)-th after ReOrg 
         self.cv2 = Conv(in_cs[1], *fe_b)  # for FE Scale (i-1)-th
         self.out_cv = Conv(fe_a[0] + fe_b[0], out_c, 1, 1)
+    
+    # x = [FE_i, FE_i-1]
+    def forward(self, x):
+        # ReOrg: (b, c, w, h) => (b, 4c, w/2, h/2)
+        x1 = self.cv1(self.reorg(x[0]))
+        x2 = self.cv2(x[1])
+        return self.out_cv(torch.cat((x1, x2), dim=1))
+
+class BFMTiny(nn.Module):
+    def __init__(self, in_cs, out_c, fe_a, fe_b):
+        # fe_a = scale_i fe_b = scale_i-1 
+        # fe_a/fe_b = [Conv size, kernel size, stride]
+        super(BFMTiny, self).__init__()
+        self.reorg = ReOrg()  # for FE Scale (i)-th
+        # Conv( ch_in, (ch_out, kernel, stride) )
+        self.cv1 = Conv(in_cs[0]*4, *fe_a, None, 1, nn.LeakyReLU(0.1))  # for FE Scale (i)-th after ReOrg 
+        self.cv2 = Conv(in_cs[1], *fe_b, None, 1, nn.LeakyReLU(0.1))  # for FE Scale (i-1)-th
+        self.out_cv = Conv(fe_a[0] + fe_b[0], out_c, 1, 1, None, 1, nn.LeakyReLU(0.1))
     
     # x = [FE_i, FE_i-1]
     def forward(self, x):

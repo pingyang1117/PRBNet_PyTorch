@@ -779,12 +779,12 @@ def parse_model(d, ch):  # model_dict, input_channels(3)
                      ST2CSPA, ST2CSPB, ST2CSPC]:
                 args.insert(2, n)  # number of repeats
                 n = 1
-        elif m in [RBBlockA, RBBlockB]:
+        elif m in [RBBlockA, RBBlockB, RBBlockTiny]:
             c2 = args[0]
             # e.g. '128,1,2;256,1,1' = [[128, 1, 2], [256, 1, 1]]
             args[1] = [ [int(x) for x in arg.split(',')] for arg in args[1].split(';') ]
             args = [[ch[x] for x in f]] + args[:1] + args[1] + args[2:]
-        elif m in [BFM, BFMBlockB]:
+        elif m in [BFM, BFMBlockB, BFMTiny]:
             c2 = args[0]
             # e.g. '128,1,2;256,1,1' = [[128, 1, 2], [256, 1, 1]]
             args[1] = [ [int(x) for x in arg.split(',')] for arg in args[1].split(';') ]
