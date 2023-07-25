@@ -753,7 +753,7 @@ def parse_model(d, ch):  # model_dict, input_channels(3)
         if m in [nn.Conv2d, Conv, RobustConv, RobustConv2, DWConv, GhostConv, RepConv, RepConv_OREPA, DownC, 
                  SPP, SPPF, SPPCSPC, GhostSPPCSPC, MixConv2d, Focus, Stem, GhostStem, CrossConv, CBAM,
                  Bottleneck, BottleneckCSPA, BottleneckCSPB, BottleneckCSPC, 
-                 BottleneckMSP,BottleneckMSPA,BottleneckMSPB,
+                 BottleneckMSPA,
                  RepBottleneck, RepBottleneckCSPA, RepBottleneckCSPB, RepBottleneckCSPC,  
                  Res, ResCSPA, ResCSPB, ResCSPC, 
                  RepRes, RepResCSPA, RepResCSPB, RepResCSPC, 
