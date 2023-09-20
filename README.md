@@ -33,6 +33,7 @@ This is the reference PyTorch implementation for training and testing  [single-s
 | **YOLOv7-E6E** | 1280 | **56.8%** | **74.4%** | **62.1%** | **36**| 
 |  |  |  |  |  |  |  |  
 | [**PRB-FPN6**](https://drive.google.com/file/d/1id8P3NEaHFE0534yCTTpp6HcGC5rnafG/view?usp=sharing) | 1280 | **56.9%** | **74.1%** | **62.3%** | **31**| 
+| [**PRB-FPN6-MSP**](https://drive.google.com/file/d/1sCsB9bOR0w9QMBaRuEQLGp_WKGnjYpCh/view?usp=sharing) | 1280 | **57.2%** | **74.5%** | **62.5%** | **27**| 
 |  |  |  |  |  |  |  |    
 
 If you find our work useful in your research please consider citing our paper:

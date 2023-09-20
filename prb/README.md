@@ -19,6 +19,7 @@
 | **YOLOv7-E6E** | 1280 | **56.8%** | **74.4%** | **62.1%** | **36**| 
 |  |  |  |  |  |  |  |  
 | [**PRB-FPN6**](https://drive.google.com/file/d/1id8P3NEaHFE0534yCTTpp6HcGC5rnafG/view?usp=sharing) | 1280 | **56.9%** | **74.1%** | **62.3%** | **31**| 
+| [**PRB-FPN6-MSP**](https://drive.google.com/file/d/1sCsB9bOR0w9QMBaRuEQLGp_WKGnjYpCh/view?usp=sharing) | 1280 | **57.2%** | **74.5%** | **62.5%** | **27**| 
 |  |  |  |  |  |  |  |    
 
 ## Installation & Getting started
@@ -27,14 +28,18 @@ Please refer to the [yolov7 README](./yolov7_README.md) to get started.
 
 ## Testing
 
-Tested with: Python 3.8.0, Pytorch 1.12.0+cu117
+Tested with: [`PyTorch Release 23.02`](https://docs.nvidia.com/deeplearning/frameworks/pytorch-release-notes/rel-23-02.html)
 
-[`prb-fpn.pt`](https://drive.google.com/file/d/1hhOGyPHogXIe0MrMw9ReJLAuDcvRbdCI/view?usp=sharing) [`prb-fpn-csp.pt`](https://drive.google.com/file/d/1vUglmai8lqfiEL2_nJZBZju-tGlrFL0I/view?usp=sharing) 
-[`PRB-FPN6-2PY.pt`](https://drive.google.com/file/d/1kxmVqGe-j9rVSUbg-122Q7hwwbeQACGM/view?usp=sharing) 
-[`PRB-FPN6-3PY.pt`](https://drive.google.com/file/d/1vcMgBM6KseSZKHjUuRhpLiVA4TswDzYu/view?usp=sharing) 
+P5 Weights: [`prb-fpn-elan.pt`](https://drive.google.com/file/d/1hhOGyPHogXIe0MrMw9ReJLAuDcvRbdCI/view?usp=sharing), [`prb-fpn-csp.pt`](https://drive.google.com/file/d/1vUglmai8lqfiEL2_nJZBZju-tGlrFL0I/view?usp=sharing) 
+
+P6 Weights [`PRB-FPN6-2PY.pt`](https://drive.google.com/file/d/1kxmVqGe-j9rVSUbg-122Q7hwwbeQACGM/view?usp=sharing), 
+[`PRB-FPN6-3PY.pt`](https://drive.google.com/file/d/1vcMgBM6KseSZKHjUuRhpLiVA4TswDzYu/view?usp=sharing),
+[`PRB-FPN6-MSP.pt`](https://drive.google.com/file/d/1sCsB9bOR0w9QMBaRuEQLGp_WKGnjYpCh/view?usp=sharing)
+
+
 
 ``` shell
-python test.py --data data/coco.yaml --img 640 --batch 32 --conf 0.001 --iou 0.65 --device 0 --weights prb-fpn.pt --name prb-fpn_640_val
+python test.py --data data/coco.yaml --img 640 --batch 32 --conf 0.001 --iou 0.65 --device 0 --weights prb-fpn-elan.pt --name prb-fpn-elan_640_val
 ```
 
 You will get the results:
@@ -70,40 +75,40 @@ Single GPU training for P5 model
 
 ``` shell
 # train prb-fpn-csp models
-python train.py --workers 8 --device 0 --batch-size 36 --data data/coco.yaml --epochs 400 --img 640 640 --cfg cfg/training/PRB_Series/PRB-FPN-CSP.yaml --weights '' --name PRB-FPN-CSP --hyp data/hyp.scratch.p5.yaml
+python train.py --workers 8 --device 0 --batch-size 36 --data data/coco.yaml --epochs 330 --img 640 640 --cfg cfg/training/PRB_Series/PRB-FPN-CSP.yaml --weights '' --name PRB-FPN-CSP --hyp data/hyp.scratch.p5.yaml
 
-# train prb-fpn models
-python train.py --workers 8 --device 0 --batch-size 25 --data data/coco.yaml --epochs 400 --img 640 640 --cfg cfg/training/PRB_Series/PRB-FPN.yaml --weights '' --name PRB-FPN --hyp data/hyp.scratch.p5.yaml
-```
-
-Multiple GPU training
-
-``` shell
-# train prb-fpn-csp models
-python -m torch.distributed.launch --nproc_per_node 4 --master_port 9527 train.py --workers 8 --device 0,1,2,3 --sync-bn --batch-size 144 --data data/coco.yaml --img 640 640 --cfg cfg/training/PRB_Series/PRB-FPN-CSP.yaml --weights '' --name PRB-FPN-CSP-4GPU --hyp data/hyp.scratch.p5.yaml
-
-# train prb-fpn models
-python -m torch.distributed.launch --nproc_per_node 8 --master_port 9527 train.py --workers 8 --device 0,1,2,3,4,5,6,7 --sync-bn --batch-size 200 --data data/coco.yaml --img 640 640 --cfg cfg/training/PRB_Series/PRB-FPN.yaml --weights '' --name PRB-FPN-8GPU --hyp data/hyp.scratch.p5.yaml
-
+# train prb-fpn-msp models
+python train.py --workers 8 --device 0 --batch-size 25 --data data/coco.yaml --epochs 330 --img 640 640 --cfg cfg/training/PRB_Series/PRB-FPN-ELAN.yaml --weights '' --name PRB-FPN-ELAN --hyp data/hyp.scratch.p5.yaml
 ```
 
 Single GPU training for P6 model
 
 ``` shell
-# train PRB-FPN6-2PY models
-python train_aux.py --workers 8 --device 0 --batch-size 4 --data data/coco.yaml --epochs 400 --img 1280 1280 --cfg cfg/training/PRB_Series/PRB-FPN6-2PY.yaml --weights '' --name PRB-FPN6-2PY --hyp data/hyp.scratch.p6.yaml
+# train PRB-FPN6-MSP models
+python train_aux.py --workers 8 --device 0 --batch-size 14 --data data/coco.yaml --epochs 330 --img 1280 1280 --cfg cfg/training/PRB_Series/PRB-FPN6-MSP.yaml --weights '' --name PRB-FPN6-MSP --hyp data/hyp.scratch.p6.yaml
 
 # train PRB-FPN6-3PY models
 python train_aux.py --workers 8 --device 0 --batch-size 28 --data data/coco.yaml --epochs 330 --img 1280 1280 --cfg cfg/training/PRB_Series/PRB-FPN6-3PY.yaml --weights '' --name PRB-FPN6-3PY --hyp data/hyp.scratch.p6.yaml
 
 ```
 
+Multiple GPU training for P5/6 model
+
+``` shell
+# train prb-fpn-elan p5 models
+python -m torch.distributed.launch --nproc_per_node 8 --master_port 9527 train.py --workers 8 --device 0,1,2,3,4,5,6,7 --sync-bn --batch-size 200 --data data/coco.yaml --img 640 640 --cfg cfg/training/PRB_Series/PRB-FPN-ELAN.yaml --weights '' --name PRB-FPN-ELAN-8GPU --hyp data/hyp.scratch.p5.yaml
+
+# train prb-fpn6-msp p6 models
+python -m torch.distributed.launch --nproc_per_node 2 --master_port 9527 train_aux.py --workers 8 --device 0,1,2 --sync-bn --batch-size 28 --data data/coco.yaml --img 1280 1280 --cfg cfg/training/PRB_Series/PRB-FPN6-MSP.yaml --weights '' --name PRB-FPN6-MSP-2GPU --hyp data/hyp.scratch.p6.yaml
+
+```
 
 
 ## Transfer learning
 
 [`prb-fpn-csp.pt`](https://drive.google.com/file/d/1vUglmai8lqfiEL2_nJZBZju-tGlrFL0I/view?usp=sharing) [`prb-fpn_training.pt`](https://drive.google.com/file/d/1XQ2hSXq3fAWoH1qBynrMZwYSzPGe78nT/view?usp=sharing) 
  [`prb-fpn6-3py_training.pt`](https://drive.google.com/file/d/1_xAVNL2Zg2HGbJsh7n4bDehyFNrlXbDV/view?usp=sharing) 
+ [`prb-fpn6-msp-training.pt`](https://drive.google.com/file/d/1AXO8DGZ5XHrI0x2c9C1vHHvufvzKRUUB/view?usp=sharing)
 
 
 Single GPU finetuning for custom dataset
