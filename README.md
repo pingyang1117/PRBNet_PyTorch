@@ -22,9 +22,9 @@ This is the reference PyTorch implementation for training and testing  [single-s
 | :-- | :-: | :-: | :-: | :-: | :-: | :-: | 
 | **YOLOv7-x** | 640 | **53.1%** | **71.2%** | **57.8%** | **33.8%** | **114** | 
 |  |  |  |  |  |  |  |  
-| [**PRB-FPN-CSP**](https://drive.google.com/file/d/1vUglmai8lqfiEL2_nJZBZju-tGlrFL0I/view?usp=sharing) | 640 | **51.8%** | **70.0%** | **56.7%** | **32.6%** |  **113** | 
-| [**PRB-FPN-MSP**](https://drive.google.com/file/d/1jDEEfSa-mVmF-fm2YyoagT0XfP-zXM9s/view?usp=sharing) | 640 | **53.3%** | **71.1%** | **58.3%** | **34.1%** | **94** | 
-| [**PRB-FPN-ELAN**](https://drive.google.com/file/d/1DEhVbKLYVxEkSzsxoWgMh4y6b_h8DvwO/view?usp=sharing) | 640 | **52.5%** | **70.4%** | **57.2%** | **33.4%** |  **70** | 
+| [**PRB-FPN-CSP**](http://140.113.110.150:5000/sharing/AZc2PgpWN) | 640 | **51.8%** | **70.0%** | **56.7%** | **32.6%** |  **113** | 
+| [**PRB-FPN-MSP**](http://140.113.110.150:5000/sharing/Es4M7Vprv) | 640 | **53.3%** | **71.1%** | **58.3%** | **34.1%** | **94** | 
+| [**PRB-FPN-ELAN**](http://140.113.110.150:5000/sharing/orXcxcGSw) | 640 | **52.5%** | **70.4%** | **57.2%** | **33.4%** |  **70** | 
 |  |  |  |  |  |  |  | 
 
 #### P6 Model
@@ -32,8 +32,8 @@ This is the reference PyTorch implementation for training and testing  [single-s
 | :-- | :-: | :-: | :-: | :-:  |  :-: | 
 | **YOLOv7-E6E** | 1280 | **56.8%** | **74.4%** | **62.1%** | **36**| 
 |  |  |  |  |  |  |  |  
-| [**PRB-FPN6**](https://drive.google.com/file/d/1id8P3NEaHFE0534yCTTpp6HcGC5rnafG/view?usp=sharing) | 1280 | **56.9%** | **74.1%** | **62.3%** | **31**| 
-| [**PRB-FPN6-MSP**](https://drive.google.com/file/d/1sCsB9bOR0w9QMBaRuEQLGp_WKGnjYpCh/view?usp=sharing) | 1280 | **57.2%** | **74.5%** | **62.5%** | **27**| 
+| [**PRB-FPN6**](http://140.113.110.150:5000/sharing/xvwUNT3zZ) | 1280 | **56.9%** | **74.1%** | **62.3%** | **31**| 
+| [**PRB-FPN6-MSP**](http://140.113.110.150:5000/sharing/wavtpaPzu) | 1280 | **57.2%** | **74.5%** | **62.5%** | **27**| 
 |  |  |  |  |  |  |  |    
 
 If you find our work useful in your research please consider citing our paper:
