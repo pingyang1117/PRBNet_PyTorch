@@ -8,9 +8,9 @@
 | :-- | :-: | :-: | :-: | :-: | :-: | :-: | 
 | **YOLOv7-x** | 640 | **53.1%** | **71.2%** | **57.8%** | **33.8%** | **114** | 
 |  |  |  |  |  |  |  |  
-| [**PRB-FPN-CSP**](https://drive.google.com/file/d/1vUglmai8lqfiEL2_nJZBZju-tGlrFL0I/view?usp=sharing) | 640 | **51.8%** | **70.0%** | **56.7%** | **32.6%** |  **113** | 
-| [**PRB-FPN-MSP**](https://drive.google.com/file/d/1jDEEfSa-mVmF-fm2YyoagT0XfP-zXM9s/view?usp=sharing) | 640 | **53.3%** | **71.1%** | **58.3%** | **34.1%** | **94** | 
-| [**PRB-FPN-ELAN**](https://drive.google.com/file/d/1DEhVbKLYVxEkSzsxoWgMh4y6b_h8DvwO/view?usp=sharing) | 640 | **52.5%** | **70.4%** | **57.2%** | **33.4%** |  **70** | 
+| [**PRB-FPN-CSP**](http://140.113.110.150:5000/sharing/AZc2PgpWN) | 640 | **51.8%** | **70.0%** | **56.7%** | **32.6%** |  **113** | 
+| [**PRB-FPN-MSP**](http://140.113.110.150:5000/sharing/Es4M7Vprv) | 640 | **53.3%** | **71.1%** | **58.3%** | **34.1%** | **94** | 
+| [**PRB-FPN-ELAN**](http://140.113.110.150:5000/sharing/orXcxcGSw) | 640 | **52.5%** | **70.4%** | **57.2%** | **33.4%** |  **70** | 
 |  |  |  |  |  |  |  | 
 
 #### P6 Model
@@ -18,8 +18,8 @@
 | :-- | :-: | :-: | :-: | :-:  |  :-: | 
 | **YOLOv7-E6E** | 1280 | **56.8%** | **74.4%** | **62.1%** | **36**| 
 |  |  |  |  |  |  |  |  
-| [**PRB-FPN6**](https://drive.google.com/file/d/1id8P3NEaHFE0534yCTTpp6HcGC5rnafG/view?usp=sharing) | 1280 | **56.9%** | **74.1%** | **62.3%** | **31**| 
-| [**PRB-FPN6-MSP**](https://drive.google.com/file/d/1sCsB9bOR0w9QMBaRuEQLGp_WKGnjYpCh/view?usp=sharing) | 1280 | **57.2%** | **74.5%** | **62.5%** | **27**| 
+| [**PRB-FPN6**](http://140.113.110.150:5000/sharing/xvwUNT3zZ) | 1280 | **56.9%** | **74.1%** | **62.3%** | **31**| 
+| [**PRB-FPN6-MSP**](http://140.113.110.150:5000/sharing/wavtpaPzu) | 1280 | **57.2%** | **74.5%** | **62.5%** | **27**| 
 |  |  |  |  |  |  |  |    
 
 ## Installation & Getting started
@@ -30,11 +30,10 @@ Please refer to the [yolov7 README](./yolov7_README.md) to get started.
 
 Tested with: [`PyTorch Release 23.02`](https://docs.nvidia.com/deeplearning/frameworks/pytorch-release-notes/rel-23-02.html)
 
-P5 Weights: [`prb-fpn-elan.pt`](https://drive.google.com/file/d/1hhOGyPHogXIe0MrMw9ReJLAuDcvRbdCI/view?usp=sharing), [`prb-fpn-csp.pt`](https://drive.google.com/file/d/1vUglmai8lqfiEL2_nJZBZju-tGlrFL0I/view?usp=sharing) 
+P5 Weights: [`prb-fpn-elan.pt`](http://140.113.110.150:5000/sharing/orXcxcGSw), [`prb-fpn-csp.pt`](http://140.113.110.150:5000/sharing/AZc2PgpWN) 
 
-P6 Weights [`PRB-FPN6-2PY.pt`](https://drive.google.com/file/d/1kxmVqGe-j9rVSUbg-122Q7hwwbeQACGM/view?usp=sharing), 
-[`PRB-FPN6-3PY.pt`](https://drive.google.com/file/d/1vcMgBM6KseSZKHjUuRhpLiVA4TswDzYu/view?usp=sharing),
-[`PRB-FPN6-MSP.pt`](https://drive.google.com/file/d/1sCsB9bOR0w9QMBaRuEQLGp_WKGnjYpCh/view?usp=sharing)
+P6 Weights [`PRB-FPN6.pt`](http://140.113.110.150:5000/sharing/xvwUNT3zZ),
+[`PRB-FPN6-MSP.pt`](http://140.113.110.150:5000/sharing/wavtpaPzu)
 
 
 
@@ -106,9 +105,8 @@ python -m torch.distributed.launch --nproc_per_node 2 --master_port 9527 train_a
 
 ## Transfer learning
 
-[`prb-fpn-csp.pt`](https://drive.google.com/file/d/1vUglmai8lqfiEL2_nJZBZju-tGlrFL0I/view?usp=sharing) [`prb-fpn_training.pt`](https://drive.google.com/file/d/1XQ2hSXq3fAWoH1qBynrMZwYSzPGe78nT/view?usp=sharing) 
- [`prb-fpn6-3py_training.pt`](https://drive.google.com/file/d/1_xAVNL2Zg2HGbJsh7n4bDehyFNrlXbDV/view?usp=sharing) 
- [`prb-fpn6-msp-training.pt`](https://drive.google.com/file/d/1AXO8DGZ5XHrI0x2c9C1vHHvufvzKRUUB/view?usp=sharing)
+[`prb-fpn-csp.pt`](http://140.113.110.150:5000/sharing/AZc2PgpWN) [`prb-fpn-elan_training.pt`](http://140.113.110.150:5000/sharing/NE9UvOqPo) 
+ [`prb-fpn6-msp-training.pt`](http://140.113.110.150:5000/sharing/MY2wRu4CI)
 
 
 Single GPU finetuning for custom dataset
